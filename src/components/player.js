@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, setState, useEffect } from 'react';
 
 class Player extends React.Component {
 
@@ -8,15 +8,38 @@ class Player extends React.Component {
 
         function playSounds(e){
             // loop through all columns over and over w highlightColumn and playSoundsInColumn functions
+            // playSoundsInColumn(2)
         }
 
-        function highlightColumn(col){
+        // function highlightColumn(col){
+        //     const steps = document.getElementsByClassName('step'+col)
+        //     for(var step of steps){
+        //         step.classList.toggle('step_played')
+        //     }
+        // }
+
+        function unhighlightColumn(col){
 
         }
 
         function playSoundsInColumn(col){
             // include play and pause, based this on tempo
+
+            const steps = document.getElementsByClassName('step'+col)
+            for(var step of steps){
+                step.classList.toggle('step_played')
+                if(step.dataset.clicked === 'true'){
+                    const sound = document.getElementById('sound' + step.dataset.soundRow + '_file')
+                    sound.play();
+                    setTimeout(() => {
+                        sound.pause();
+                        sound.currentTime = 0;
+                      }, 150);
+                }
+            }
         }
+
+
 
         function stop(e){
 

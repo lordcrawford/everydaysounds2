@@ -1,39 +1,24 @@
-import React, { useState } from 'react';
+import React, { useState} from 'react';
 
-class Step extends React.Component {
-    constructor(props){
-        super(props)
-        this.state = {
-            color: 'white',
-            clicked: false
-        }
+import './step.css';
+
+
+const Step = ({stepNum, soundRowNum}) => {
+
+    const [clicked, setClicked] = useState(false);
+
+    const handleClick = () => {
+        setClicked(!clicked)
     }
-    
-    render(){
-        const handleClick = () => {
-            this.setState({
-                color: (this.state.color === 'white' || this.state.color === 'yellow') ? '#A240DE': 'white',
-                clicked: this.state.clicked === false ? true : false
-            });
-        }
 
-        const MouseOver = () => {
-            this.setState({
-                color: this.state.clicked === true ? '#A240DE' : 'yellow'
-            });
-        }
-        const MouseOut = () => {
-            this.setState({
-                color: this.state.clicked === true ? '#A240DE' : 'white'
-            });
-        }
+    const className_text = 'step h-[2.6vw] w-[2.6vw] rounded-[3px] inline-block step' + stepNum
+                            + ((!clicked) ? ' step_hovered' : '')
+                            + ((clicked) ? ' step_clicked' : '');
 
-        return (
-            <div className = 'h-[2.6vw] w-[2.6vw] rounded-[3px] inline-block'
-            onClick={handleClick} onMouseOver={MouseOver} onMouseOut={MouseOut}
-            style={{backgroundColor: this.state.color}}/>
-        )
-    }
+    return(
+        <div className ={className_text} onClick={handleClick} 
+            data-clicked={clicked} data-sound-row={soundRowNum}/>
+    )
 }
 
 export default Step

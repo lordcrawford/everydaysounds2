@@ -1,0 +1,15 @@
+.step {
+    background-color: white;
+}
+
+.step_clicked {
+    background-color: #A240DE;
+}
+
+.step_hovered:hover {
+    background-color: yellow;
+}
+
+.step_played{
+    background-color: red;
+}

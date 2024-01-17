@@ -8,7 +8,10 @@ const Home = () => {
     const pageRefresh = () => window.location.reload(true)
 
     // eventually, allow users to add more sound rows / tracks if they want
-    
+
+    // eventually, allow people to export the sounds (this sounds hard af to do but seems like a core feature)
+    // allow them to record a segment or default shorter sound
+
     return (
         <div id="home" className='bg-black h-screen text-[#A240DE] font-anonymouspro'>
             <div id="top" className='justify-between flex'>
@@ -34,3 +37,22 @@ const Home = () => {
 }
 
 export default Home
+
+// const handleClick = () => {
+//     this.setState({
+//         clicked: this.state.clicked === false ? true : false
+//     }, function (){
+//         this.setState({color: this.state.clicked === true ? '#A240DE' : 'white'})
+//         });
+// }
+
+// const MouseOver = () => {
+//     this.setState({
+//         color: this.state.clicked === true ? '#A240DE' : 'yellow'
+//     });
+// }
+// const MouseOut = () => {
+//     this.setState({
+//         color: this.state.clicked === true ? '#A240DE' : 'white'
+//     });
+// }
