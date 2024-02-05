@@ -11,7 +11,7 @@ const Step = ({stepNum, soundRowNum}) => {
         setClicked(!clicked)
     }
 
-    const className_text = 'step h-[2.6vw] w-[2.6vw] rounded-[3px] inline-block step' + stepNum
+    const className_text = 'step h-[2.6vw] w-[2.6vw] rounded-[1.2vw] inline-block align-items-center step' + stepNum
                             + ((!clicked) ? ' step_hovered' : '')
                             + ((clicked) ? ' step_clicked' : '');
 

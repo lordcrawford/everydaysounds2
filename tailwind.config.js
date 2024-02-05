@@ -7,6 +7,8 @@ module.exports = {
     extend: {
       fontFamily: {
         anonymouspro: ["Anonymous Pro", "sans-serif"],
+        museomoderno: ["MuseoModerno", "sans-serif"],
+        limelight: ["Limelight", "sans-serif"],
       },
     },
   },
