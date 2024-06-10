@@ -42,12 +42,14 @@ const Player = () => {
             const steps_to_clear = document.getElementsByClassName('step'+(col))
             for(var step of steps_to_clear){
                 step.classList.remove('step_played')
+                step.children[0].classList.remove('hidden-circle')
             }
         }
 
         const steps = document.getElementsByClassName('step'+col_to_highlight)
         for(var step of steps){
             step.classList.toggle('step_played')
+            step.children[0].classList.toggle('hidden-circle')
         }
     }
 
@@ -59,6 +61,7 @@ const Player = () => {
 
             // checks that step is clicked and sound file is loaded before playing the sound
             if((step.dataset.clicked === 'true') && (sound_input.value !== '')){
+                console.log('should play' + col)
                 const sound = document.getElementById('sound' + step.dataset.soundRow + '_file')
                 sound.play();
                 setTimeout(() => {
@@ -78,6 +81,7 @@ const Player = () => {
             const steps_to_clear = document.getElementsByClassName('step'+(col))
             for(var step of steps_to_clear){
                 step.classList.remove('step_played')
+                step.children[0].classList.remove('hidden-circle')
             }
         }
 
@@ -85,13 +89,18 @@ const Player = () => {
     }
 
     function clear(e) {
+        playing = false;
         // clears clicks
         for(let col = 1; col < 17; col++){
             const steps_to_clear = document.getElementsByClassName('step'+(col))
             for(var step of steps_to_clear){
+                step.dataset.clicked = false;
                 step.classList.remove('step_clicked')
+                step.classList.remove('step_played')
+                step.children[0].classList.remove('hidden-circle')
             }
         }
+        col_to_play = 1;
     }
 
     //separately be able to control volume of audio
@@ -99,10 +108,10 @@ const Player = () => {
     //use playbackrate to control tempo
 
     return (
-        <div className='space-x-[2vw] mt-[5%] text-center'>
-            <button id="play" className='border-white border-2 rounded-[1.5vw] p-[0.5vw]' onClick={playSounds}> play </button>
-            <button id="stop" className='border-white border-2 rounded-[1.5vw] p-[0.5vw]' onClick={stop}> stop </button>
-            <button id="clear" className='border-white border-2 rounded-[1.5vw] p-[0.5vw]' onClick={clear}> clear </button>
+        <div className='space-x-[2vw] mt-[3%] text-center text-white'>
+            <button id="play" className='bg-black border-[#00FBFB] border-x-4 rounded-[1.5vw] p-[1vw]' onClick={playSounds}> play </button>
+            <button id="stop" className='bg-black border-[#00FBFB] border-x-4 rounded-[1.5vw] p-[1vw]' onClick={stop}> stop </button>
+            <button id="clear" className='bg-black border-[#00FBFB] border-x-4 rounded-[1.5vw] p-[1vw]' onClick={clear}> clear </button>
         </div>
     )
 }

@@ -1,20 +1,18 @@
 .step {
-    background-color: rgb(68, 76, 111);
     box-shadow: -3px -3px 3px rgba(134, 134, 134, 0.7),
               -3px -3px 3px rgba(255, 255, 255, .5),
               4px 4px 3px #383737,
               4px 4px 3px rgba(0, 0, 0, .15);
     cursor: pointer;
     vertical-align: middle;
-
 }
 
 .step_clicked {
-    box-shadow: -2px -2px 6px rgb(90, 227, 248),
-              -2px -2px 4px rgb(90, 227, 248),
-              2px 2px 2px rgb(90, 227, 248),
-              2px 2px 4px rgb(90, 227, 248);
-    
+    box-shadow: -2px -2px 6px #FF69B4,
+              -2px -2px 4px #FF69B4,
+              2px 2px 2px #FF69B4,
+              2px 2px 4px #FF69B4;
+    animation: rotateAnimation 3s linear infinite;
 }
 
 .step_hovered:hover {
@@ -22,8 +20,44 @@
               -2px -2px 4px rgba(255, 255, 255, 0.811),
               2px 2px 2px rgba(236, 235, 235, 0.692),
               2px 2px 4px rgba(255, 255, 255, 0.1);
+    animation: pulse 1s ease-in-out infinite;
 }
 
 .step_played{
-    background-color: rgb(132, 186, 204);
+    background-color: #FF69B4;
+}
+
+.hidden-circle {
+    width: 1.5vw; 
+    height: 1.5vw;
+    position: absolute; 
+    top: 0; 
+    right: 0;
+    bottom: 0;
+    left: 0;
+    margin: auto; 
+    background-color: #FF69B4; 
+    border-radius: 50%; 
+  }
+
+
+@keyframes rotateAnimation {
+    from {
+      transform: rotate(0deg); 
+    }
+    to {
+      transform: rotate(360deg); 
+    }
+  }
+
+@keyframes pulse {
+0% {
+    transform: scale(1);
+}
+50% {
+    transform: scale(1.25);
+}
+100% {
+    transform: scale(1);
+}
 }

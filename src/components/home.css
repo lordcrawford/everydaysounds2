@@ -1,0 +1,40 @@
+.popout1 {
+    position: relative;
+    overflow: hidden;
+    width: 30%;
+    padding: 0;
+    transition: transform 0.3s ease;
+    background-color: black;
+    box-shadow: -2px 0 5px #04C9C9;
+    color: white;
+    transform: translateX(100%);
+    overflow-y:scroll
+}
+
+.popout1.open {
+    transform: translateX(0);
+}
+
+.popout1.closed {
+    width:0;
+}
+
+.popout2 {
+    position: relative;
+    overflow: hidden;
+    width: 30%;
+    padding: 0;
+    transition: transform 0.3s ease;
+    background-color: black;
+    box-shadow: -2px 0 5px #04C9C9;
+    color: white;
+    transform: translateX(100%);
+}
+
+.popout2.open {
+    transform: translateX(0);
+}
+
+.popout2.closed {
+    width:0;
+}
