@@ -1,7 +1,10 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import SoundRow from "./sound_row.js"
 import Player from "./player.js"
+import { startOrbsAnimation } from './orbsanimation.js'; 
+import { startRaysAnimation } from './raysanimation.js'; 
+
 
 import './home.css';
 
@@ -54,10 +57,18 @@ const Home = () => {
         setAboutPopoutOpen(false);
         document.getElementById('about_button').style.color = "black"
     };
+
+    useEffect(() => {
+        const animations = [startRaysAnimation, startOrbsAnimation];
+        const randomAnimation = animations[Math.floor(Math.random() * animations.length)];
+        randomAnimation(); 
+        
+    }, []);
     
     return (
-        <div id="home" className='h-screen text-black font-museomoderno flex'>
-            <div id="maincontent" className='flex-grow'>
+        <div id="home" className='h-screen text-black font-museomoderno flex relative'>
+            <canvas id="backgroundCanvas" className="absolute top-0 left-0"></canvas>
+            <div id="maincontent" className='flex-grow z-10'>
                 <div id="top" className='justify-between flex mt-[1vw]'>
                     <h1 className=' font-limelight w-[40%] ml-[3%] text-[4vw] ' onClick={pageRefresh}>.everydaysounds.</h1>
                     <nav id="top-nav-right" className='flex flex-col text-[1.5vw] text-right mr-[3vw] mt-[0.5vw] space-y-[1vw]'>
@@ -84,7 +95,7 @@ const Home = () => {
                 <button className='absolute top-[2%] left-[3%] text-4xl text-[#04C9C9]' onClick={closePopout}>
                     &lt;
                 </button>
-                <span className='absolute top-[1%] left-[8%] p-[5%] leading-normal font-extralight'>
+                <span className='absolute left-[8%] p-[5%] leading-normal font-extralight'>
                     <div className="text-center">
                         <span className='text-[1.7vw] text-[#04C9C9] font-semibold'>Summary</span>
                     </div><br></br>
@@ -119,7 +130,7 @@ const Home = () => {
                 <button className='absolute top-[2%] left-[3%] text-4xl text-[#04C9C9]' onClick={closeAboutPopout}>
                     &lt;
                 </button>
-                <span className='absolute top-[1%] left-[8%] p-[5%] leading-normal font-extralight'>
+                <span className='absolute left-[8%] p-[5%] leading-normal font-extralight'>
                     <div className="text-center">
                             <span className='text-[1.7vw] text-[#04C9C9] font-semibold'>What's Everyday Sounds?</span>
                     </div><br></br>
