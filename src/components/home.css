@@ -9,7 +9,6 @@
   
   #home {
     position: relative;
-    overflow: hidden;
   }
 
 .popout1 {
@@ -51,4 +50,17 @@
 
 .popout2.closed {
     width:0;
+}
+
+@media screen and (max-width: 600px) {
+   #sequencer{
+    overflow: scroll;
+    width: 100%;
+   }
+   #instructions_button{
+    visibility: hidden;
+   }
+   #about_button{
+    visibility: hidden;
+   }
 }

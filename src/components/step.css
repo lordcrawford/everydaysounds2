@@ -4,7 +4,6 @@
               4px 4px 3px #383737,
               4px 4px 3px rgba(0, 0, 0, .15);
     cursor: pointer;
-    vertical-align: middle;
 }
 
 .step_clicked {
@@ -60,4 +59,10 @@
 100% {
     transform: scale(1);
 }
+}
+
+@media screen and (max-width: 600px) {
+    .step{
+        width:40px;
+    }
 }

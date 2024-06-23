@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react';
 
 import SoundRow from "./sound_row.js"
 import Player from "./player.js"
-import { startOrbsAnimation } from './orbsanimation.js'; 
-import { startRaysAnimation } from './raysanimation.js'; 
+import { startOrbsAnimation } from './animations/orbsanimation.js'; 
+import { startRaysAnimation } from './animations/raysanimation.js'; 
 
 
 import './home.css';
@@ -11,12 +11,6 @@ import './home.css';
 const Home = () => {
 
     const pageRefresh = () => window.location.reload(true)
-
-    // eventually, allow users to add more sound rows / tracks if they want
-
-    // eventually, allow people to export the sounds (this sounds hard af to do but seems like a core feature)
-    // allow them to record a segment or default shorter sound
-
 
     // instructions popout
 
@@ -66,20 +60,21 @@ const Home = () => {
     }, []);
     
     return (
-        <div id="home" className='h-screen text-black font-museomoderno flex relative'>
+        <div id="home" className='h-screen text-black font-museomoderno no-flex md:flex relative'>
             <canvas id="backgroundCanvas" className="absolute top-0 left-0"></canvas>
             <div id="maincontent" className='flex-grow z-10'>
                 <div id="top" className='justify-between flex mt-[1vw]'>
-                    <h1 className=' font-limelight w-[40%] ml-[3%] text-[4vw] ' onClick={pageRefresh}>.everydaysounds.</h1>
-                    <nav id="top-nav-right" className='flex flex-col text-[1.5vw] text-right mr-[3vw] mt-[0.5vw] space-y-[1vw]'>
+                    <h1 className=' font-limelight w-[40%] ml-[3%] text-[8vw] md:text-[4vw] select-none' onClick={pageRefresh}>.everydaysounds.</h1>
+                    <nav id="top-nav-right" className='flex flex-col text-[3.5vw] md:text-[1.5vw] text-right mr-[1vw] md:mr-[3vw] mt-[0.5vw] space-y-[1vw]'>
                         <button id="instructions_button" onClick={openPopout}>...instructions...</button>
                         <button id="about_button" onClick={openAboutPopout}>...about...</button>
                     </nav>
                 </div>
-                <div>
+                <div className='mt-[10%] md:mt-0'>
                     <Player/>
-                    <div id="sequencer" className='text-center mt-[4%] space-y-[0.6vw] '>
-                        <SoundRow soundrow_num={1} color={"#00FBFB"}/>
+                    <div id="sequencer" className='text-center mt-[10%] md:mt-[4%] space-y-[0.6vw] 
+                    overflow-auto '>
+                        <SoundRow soundrow_num={1} color={"#00FBFB"}/> 
                         <SoundRow soundrow_num={2} color={"#03EEEE"} />
                         <SoundRow soundrow_num={3} color={"#03DCDC"}/>
                         <SoundRow soundrow_num={4} color={"#04C9C9"}/>
@@ -92,61 +87,107 @@ const Home = () => {
             </div>
             
             <div id="popout1" className={`popout1 ${popoutOpen ? 'open' : 'closed'}`}>
-                <button className='absolute top-[2%] left-[3%] text-4xl text-[#04C9C9]' onClick={closePopout}>
-                    &lt;
+                <button className='absolute top-[1%] left-[3%] text-3xl text-[#04C9C9]' onClick={closePopout}>
+                    X
                 </button>
-                <span className='absolute left-[8%] p-[5%] leading-normal font-extralight'>
-                    <div className="text-center">
-                        <span className='text-[1.7vw] text-[#04C9C9] font-semibold'>Summary</span>
-                    </div><br></br>
+                <span className='absolute left-[8%] p-[5%] leading-normal font-extralight pt-[12%]'>
                     
                     What you see here is a 
                     <span className='font-semibold text-[#04C9C9]'> 16-step beat sequencer. </span>
                     Sequencers allow you to program a combination of notes, rhythms, and effects. Each 
-                    row in this sequencer correlates to a different audio sound that you will import. 
+                    row in this sequencer correlates to a different audio sound that you will import 
+                    and each column of the 'drum rack' represents a 'step'.
                     <br/><br/>
 
-					Each column of the 'drum rack' represents a 'step'. Each step will play a combination of sounds depending
-					on which sounds are uploaded in the rows (tracks). Once one step has played for 150 milliseconds (starter tempo, 
-					which you can change) it will continue to the next step, until all 16 are played. Then it will loop as a 
-					regular 16-step pattern. <br/><br/>
+					Each step will play a combination of sounds depending
+					on which sounds are uploaded in the rows (tracks). Once one step has played for 200 milliseconds (starter tempo)
+                    it will continue to the next step as a continuous 16-step pattern. <br/><br/> 
 
-					<div className="text-center">
-                        <span className='text-[1.7vw] text-[#04C9C9] font-semibold'>Guide</span>
-                    </div><br></br>
+                    <hr style={{color: "#04C9C9", backgroundColor: "#04C9C9", height: "2px", border: "none"}}></hr> <br/>
 
-                    <ol className='list-[upper-roman] ml-[3%] space-y-[1%] w-[90%] text-center'>
-                        <li value="1">Choose an audio file</li>
-                        <li>Only the first 100-300 milliseconds of the imported sound will be played.
-                        <span className='font-semibold text-[#04C9C9]'> Please make sure your sound is short or starts with audio.</span></li>
-                        <li>Click on which steps in the row you'd like the sound to play at</li>
-                        <li>Hear the beat by pressing 'play'</li>
-				    </ol> <br></br>
+                    <span className='space-y-[1%] w-[90%] text-center'>
+                    <span className='font-semibold text-[#FF69B4]'>1</span> - <span className='font-semibold text-[#04C9C9]'>Choose an audio file. </span>Only the first 100-300
+                     milliseconds of the imported sound will be played. Please make sure your sound is short or starts 
+                     with audio.<br/>
+                    <span className='font-semibold text-[#FF69B4]'>2</span> - <span className='font-semibold text-[#04C9C9]'>Click on steps in the row </span>you'd like the sound to play at <br/>
+                    <span className='font-semibold text-[#FF69B4]'>3</span> - <span className='font-semibold text-[#04C9C9]'>Click 'play'</span> to hear
+				    </span> <br></br>
 
 				</span>
             </div>
 
             <div id="popout2" className={`popout2 ${aboutPopoutOpen ? 'open' : 'closed'}`}>
-                <button className='absolute top-[2%] left-[3%] text-4xl text-[#04C9C9]' onClick={closeAboutPopout}>
-                    &lt;
+                <button className='absolute top-[1%] left-[3%] text-3xl text-[#04C9C9]' onClick={closeAboutPopout}>
+                    X
                 </button>
-                <span className='absolute left-[8%] p-[5%] leading-normal font-extralight'>
+                <span className='absolute left-[8%] p-[3%] leading-normal font-extralight pt-[10%]'>
                     <div className="text-center">
-                            <span className='text-[1.7vw] text-[#04C9C9] font-semibold'>What's Everyday Sounds?</span>
+                            <span className='text-[1.6vw] text-[#04C9C9] font-semibold'>What is Everyday Sounds?</span>
                     </div><br></br>
 
-                    This web-based beatmaker was first developed in 2022 as a part of a class project (History & Practice
-                    of Electronic Music). I (Lord) picked this project back up in early 2024 to make it aesthetically pleasing,
-                    built on React and incorporate new functionality that empowers people to make music. <br/><br/>
+                    This web-based beatmaker was developed by myself <a href="https://www.lord.live" 
+                    className='text-[#FF69B4] font-medium'>(Lord Crawford)</a> initially as a solo class project in 2022. <br/><br/>
+                    
+                    Everyday you go outside, you naturally create your own soundscape or 'world of sounds'; whether that's from birds chirping on your walk or
+                    Pop Smoke playing from the cars outside. I thought it'd be cool if we could capture those sounds and make new music
+                    out of it ~ Everyday Sounds. <br/><br/>
 
-                    <div className="text-center">
-                            <span className='text-[1.7vw] text-[#04C9C9] font-semibold'>What's the Vision?</span>
-                    </div><br></br>
 
-                    My goal was to enable others to use their daily surroundings to create new soundscapes, thus 
-                    the name 'everyday sounds' came to life. 
+                    I revitalized this project in early 2024 to make it aesthetically pleasing, built on React and incorporate
+                    new functionality that empowers people to make music. <br/><br/><br/>
+
+                    Visit more projects at <a href="https://www.lord.live" className='text-[#FF69B4] font-medium'>lord.live/projects</a>
 
 				</span>
+            </div>
+            
+            {/* ONLY MOBILE  */}
+            <div id="mobile_about_text" className='md:hidden pt-[5%]'>
+
+                <br/><hr style={{color: "#04C9C9", backgroundColor: "#04C9C9", height: "2px", border: "none", margin: "0 2% 0 2%"}}></hr><br/>
+
+                <div className='px-[8%] leading-normal font-light pt-[5%]'>
+                    <span className='text-[#04C9C9] font-semibold text-[6vw]'>Instructions</span><br/><br/>
+
+                    What you see here is a <span className='font-semibold text-[#04C9C9]'> 16-step beat sequencer. </span>
+                    Sequencers allow you to program a combination of notes, rhythms, and effects. Each 
+                    row in this sequencer correlates to a different audio sound that you will import 
+                    and each column of the 'drum rack' represents a 'step'.
+                    <br/><br/>
+
+                    Each step will play a combination of sounds depending
+                    on which sounds are uploaded in the rows (tracks). Once one step has played for 200 milliseconds (starter tempo)
+                    it will continue to the next step as a continuous 16-step pattern.
+                </div>
+
+                <div className='space-y-[1%] px-[10%] pt-[9%] text-center '>
+                    <span className='font-semibold text-[#FF69B4]'>1</span> - <span className='font-semibold text-[#04C9C9]'>Choose an audio file. </span>Only the first 100-300
+                        milliseconds of the imported sound will be played. Please make sure your sound is short or starts 
+                        with audio.<br/>
+                    <span className='font-semibold text-[#FF69B4]'>2</span> - <span className='font-semibold text-[#04C9C9]'>Click on steps in the row </span>you'd like the sound to play at <br/>
+                    <span className='font-semibold text-[#FF69B4]'>3</span> - <span className='font-semibold text-[#04C9C9]'>Click 'play'</span> to hear
+                </div><br/><br/>
+
+                <hr style={{color: "#04C9C9", backgroundColor: "#04C9C9", height: "2px", border: "none", margin: "0 2% 0 2%"}}></hr>
+                
+                <div className='px-[8%] leading-normal font-light pt-[10%] pb-[20%]'>
+
+                    <span className='text-[#04C9C9] font-semibold text-[6vw]'>About</span><br/><br/>
+
+                    This web-based beatmaker was developed by myself <a href="https://www.lord.live" className='text-[#FF69B4] font-medium'>
+                    (Lord Crawford)</a> initially as a solo class project in 2022. <br/><br/>
+                    
+                    Everyday you go outside, you naturally create your own soundscape or 'world of sounds'; whether that's from birds chirping on your walk or
+                    Pop Smoke playing from the cars outside. I thought it'd be cool if we could capture those sounds and make new music
+                    out of it ~ Everyday Sounds. <br/><br/>
+
+
+                    I revitalized this project in early 2024 to make it aesthetically pleasing, built on React and incorporate
+                    new functionality that empowers people to make music. <br/><br/><br/>
+
+                    Visit more projects at <a href="https://www.lord.live" className='text-[#FF69B4] font-medium'>lord.live/projects</a>
+
+				</div>
             </div>
         </div>
     )

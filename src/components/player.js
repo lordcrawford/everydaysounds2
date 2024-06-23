@@ -1,4 +1,4 @@
-import React, { useState, setState} from 'react';
+import React from 'react';
 
 const Player = () => {
 
@@ -108,10 +108,10 @@ const Player = () => {
     //use playbackrate to control tempo
 
     return (
-        <div className='space-x-[2vw] mt-[3%] text-center text-white'>
-            <button id="play" className='bg-black border-[#00FBFB] border-x-4 rounded-[1.5vw] p-[1vw]' onClick={playSounds}> play </button>
-            <button id="stop" className='bg-black border-[#00FBFB] border-x-4 rounded-[1.5vw] p-[1vw]' onClick={stop}> stop </button>
-            <button id="clear" className='bg-black border-[#00FBFB] border-x-4 rounded-[1.5vw] p-[1vw]' onClick={clear}> clear </button>
+        <div className='space-x-[10vw] md:space-x-[2vw] mt-[3%] text-center text-white select-none'>
+            <button id="play" className='bg-black hover:border-[#FF69B4] border-[#00FBFB] border-x-4 rounded-[1.5vw] p-[1vw]' onClick={playSounds}> play 💃🏾</button>
+            <button id="stop" className='bg-black hover:border-[#FF69B4] border-[#00FBFB] border-x-4 rounded-[1.5vw] p-[1vw]' onClick={stop}> stop 🙅🏾‍♂️</button>
+            <button id="clear" className='bg-black hover:border-[#FF69B4] border-[#00FBFB] border-x-4 rounded-[1.5vw] p-[1vw]' onClick={clear}> clear 🤷🏾‍♀️</button>
         </div>
     )
 }
