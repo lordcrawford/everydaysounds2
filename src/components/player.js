@@ -61,7 +61,6 @@ const Player = () => {
 
             // checks that step is clicked and sound file is loaded before playing the sound
             if((step.dataset.clicked === 'true') && (sound_input.value !== '')){
-                console.log('should play' + col)
                 const sound = document.getElementById('sound' + step.dataset.soundRow + '_file')
                 sound.play();
                 setTimeout(() => {
@@ -102,10 +101,6 @@ const Player = () => {
         }
         col_to_play = 1;
     }
-
-    //separately be able to control volume of audio
-
-    //use playbackrate to control tempo
 
     return (
         <div className='space-x-[10vw] md:space-x-[2vw] mt-[3%] text-center text-white select-none'>

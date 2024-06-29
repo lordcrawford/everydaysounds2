@@ -65,4 +65,8 @@
     .step{
         width:40px;
     }
+    .hidden-circle {
+        width: 3vw; 
+        height: 3vw;
+    }
 }

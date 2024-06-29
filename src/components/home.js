@@ -62,18 +62,21 @@ const Home = () => {
     return (
         <div id="home" className='h-screen text-black font-museomoderno no-flex md:flex relative'>
             <canvas id="backgroundCanvas" className="absolute top-0 left-0"></canvas>
-            <div id="maincontent" className='flex-grow z-10'>
-                <div id="top" className='justify-between flex mt-[1vw]'>
-                    <h1 className=' font-limelight w-[40%] ml-[3%] text-[8vw] md:text-[4vw] select-none' onClick={pageRefresh}>.everydaysounds.</h1>
-                    <nav id="top-nav-right" className='flex flex-col text-[3.5vw] md:text-[1.5vw] text-right mr-[1vw] md:mr-[3vw] mt-[0.5vw] space-y-[1vw]'>
-                        <button id="instructions_button" onClick={openPopout}>...instructions...</button>
-                        <button id="about_button" onClick={openAboutPopout}>...about...</button>
+            <div id="maincontent" className='w-full'>
+                <div id="top" className='justify-between flex flex-row mt-[1vw]'>
+                    <h1 className=' font-limelight w-[45%] ml-[3%] text-[8vw] md:text-[4vw] 
+                    select-none' onClick={pageRefresh}>.EVERYDAY SOUNDS.</h1>
+                    <span className='md:hidden bg-fuchsia-400 p-[2%] italic self-center'>best used on desktop</span>
+                    <nav id="top-nav-right" className='flex flex-col text-[3.5vw] 
+                    md:text-[1.5vw] mr-[1vw] md:mr-[3vw] mt-[0.5vw] space-y-[1vw]'>
+                        <button id="instructions_button" className="hidden md:inline" onClick={openPopout}>...instructions...</button>
+                        <button id="about_button" className="hidden md:inline" onClick={openAboutPopout}>...about...</button>
                     </nav>
                 </div>
-                <div className='mt-[10%] md:mt-0'>
+                <div className='mt-[8%] md:mt-0 flex flex-col items-center'>
                     <Player/>
-                    <div id="sequencer" className='text-center mt-[10%] md:mt-[4%] space-y-[0.6vw] 
-                    overflow-auto '>
+                    <div id="sequencer" className='text-center mt-[10%] py-[1%] md:mt-[2%]
+                    overflow-auto md:bg-fuchsia-400	 rounded-[20px] w-[76vw]' >
                         <SoundRow soundrow_num={1} color={"#00FBFB"}/> 
                         <SoundRow soundrow_num={2} color={"#03EEEE"} />
                         <SoundRow soundrow_num={3} color={"#03DCDC"}/>
