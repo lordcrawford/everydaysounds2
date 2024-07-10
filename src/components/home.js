@@ -66,7 +66,7 @@ const Home = () => {
                 <div id="top" className='justify-between flex flex-row mt-[1vw]'>
                     <h1 className=' font-limelight w-[45%] ml-[3%] text-[8vw] md:text-[4vw] 
                     select-none' onClick={pageRefresh}>.EVERYDAY SOUNDS.</h1>
-                    <span className='md:hidden bg-fuchsia-400 p-[2%] italic self-center'>best used on desktop</span>
+                    <span className='md:hidden bg-fuchsia-400 p-[2%] self-center w-[40%] text-center rounded-[15px]'>mobile beta, works fully on desktop</span>
                     <nav id="top-nav-right" className='flex flex-col text-[3.5vw] 
                     md:text-[1.5vw] mr-[1vw] md:mr-[3vw] mt-[0.5vw] space-y-[1vw]'>
                         <button id="instructions_button" className="hidden md:inline" onClick={openPopout}>...instructions...</button>
