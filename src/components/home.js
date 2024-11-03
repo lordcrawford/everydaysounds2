@@ -53,9 +53,7 @@ const Home = () => {
     };
 
     useEffect(() => {
-        const animations = [startRaysAnimation, startOrbsAnimation];
-        const randomAnimation = animations[Math.floor(Math.random() * animations.length)];
-        randomAnimation(); 
+        startOrbsAnimation();
         
     }, []);
     
