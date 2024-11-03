@@ -46,7 +46,7 @@ class SoundRow extends React.Component {
                     <label htmlFor={input_tag_id} className='input_box cursor-pointer text-white bg-black 
                     border-x-4 rounded-[0.3vw] p-[0.4vw] mx-[1.5vw] text-[1vw] w-[7vw]
                     align-middle h-[2.2vw] hover:animate-pulse place-self-center whitespace-nowrap 
-                    overflow-hidden' style={{borderColor:this.props.color}}> .upload. 🙇🏾‍♂️ </label>
+                    overflow-hidden' style={{borderColor:this.props.color}}> upload 🔽</label>
                 </div>
 
                 <div id={sound_row_steps_id} className="sound_steps space-x-[5vw] md:space-x-[1vw] flex">

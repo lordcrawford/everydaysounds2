@@ -65,10 +65,10 @@ const Home = () => {
             <div id="maincontent" className='w-full'>
                 <div id="top" className='justify-between flex flex-row mt-[1vw]'>
                     <h1 className=' font-limelight w-[45%] ml-[3%] text-[8vw] md:text-[4vw] 
-                    select-none' onClick={pageRefresh}>.EVERYDAY SOUNDS.</h1>
+                    select-none mt-[1vw]' onClick={pageRefresh}>.EVERYDAY SOUNDS.</h1>
                     <span className='md:hidden bg-fuchsia-400 p-[2%] self-center w-[40%] text-center rounded-[15px]'>mobile beta, works fully on desktop</span>
                     <nav id="top-nav-right" className='flex flex-col text-[3.5vw] 
-                    md:text-[1.5vw] mr-[1vw] md:mr-[3vw] mt-[0.5vw] space-y-[1vw]'>
+                    md:text-[1.5vw] mr-[1vw] md:mr-[3vw] mt-[1vw] space-y-[1vw]'>
                         <button id="instructions_button" className="hidden md:inline" onClick={openPopout}>...instructions...</button>
                         <button id="about_button" className="hidden md:inline" onClick={openAboutPopout}>...about...</button>
                     </nav>
@@ -76,7 +76,7 @@ const Home = () => {
                 <div className='mt-[8%] md:mt-0 flex flex-col items-center'>
                     <Player/>
                     <div id="sequencer" className='text-center mt-[10%] py-[1%] md:mt-[2%]
-                    overflow-auto md:bg-fuchsia-400	 rounded-[20px] w-[76vw]' >
+                    overflow-auto md:bg-[#E879F9]	 rounded-[20px] w-[76vw]' >
                         <SoundRow soundrow_num={1} color={"#00FBFB"}/> 
                         <SoundRow soundrow_num={2} color={"#03EEEE"} />
                         <SoundRow soundrow_num={3} color={"#03DCDC"}/>
