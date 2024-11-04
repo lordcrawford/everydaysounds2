@@ -55,7 +55,7 @@ const Player = () => {
 
     function playSoundsInColumn(col){
 
-        const steps = document.getElementsByClassName('step'+col)
+        const steps = document.getElementsByClassName('step' + col)
         for(var step of steps){
             const sound_input = document.getElementById('sound' + step.dataset.soundRow + '_input');
 
