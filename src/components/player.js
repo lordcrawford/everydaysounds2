@@ -1,14 +1,16 @@
 import React from 'react';
 
-const Player = () => {
+const Player = ({ loadSampleSound }) => {
 
     // use constructors with a playing state and pause
 
     var playing = false;
     var col_to_play = 1;
     var tempo = 200;
+    const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
 
     function playSounds(e){
+        audioCtx.resume();
         playing = !playing;
         if (playing){
             playColumns()
@@ -53,22 +55,21 @@ const Player = () => {
         }
     }
 
-    function playSoundsInColumn(col){
-
-        const steps = document.getElementsByClassName('step' + col)
-        for(var step of steps){
-            const sound_input = document.getElementById('sound' + step.dataset.soundRow + '_input');
-
-            // checks that step is clicked and sound file is loaded before playing the sound
-            if((step.dataset.clicked === 'true') && (sound_input.value !== '')){
-                const sound = document.getElementById('sound' + step.dataset.soundRow + '_file')
-                sound.play();
-                setTimeout(() => {
-                    sound.pause();
-                    sound.currentTime = 0;
-                    }, tempo);
+    function playSoundsInColumn(col) {
+        const steps = Array.from(document.getElementsByClassName('step' + col));
+    
+        steps.forEach((step) => {
+            const soundRow = step.dataset.soundRow;
+            const audioBuffer = document.getElementById(`sound${soundRow}_file`).audioBuffer;
+    
+            if (step.dataset.clicked === 'true' && audioBuffer) {
+                console.log(audioBuffer) 
+                const source = audioCtx.createBufferSource();
+                source.buffer = audioBuffer;
+                source.connect(audioCtx.destination);
+                source.start(audioCtx.currentTime, 0, tempo / 1000);
             }
-        }
+        });
     }
 
 
@@ -88,25 +89,22 @@ const Player = () => {
     }
 
     function clear(e) {
-        playing = false;
-        // clears clicks
-        for(let col = 1; col < 17; col++){
-            const steps_to_clear = document.getElementsByClassName('step'+(col))
-            for(var step of steps_to_clear){
-                step.dataset.clicked = false;
-                step.classList.remove('step_clicked')
-                step.classList.remove('step_played')
-                step.children[0].classList.remove('hidden-circle')
-            }
-        }
-        col_to_play = 1;
+        window.location.reload(true)
     }
 
     return (
-        <div className='space-x-[10vw] md:space-x-[2vw] mt-[3%] text-center text-white select-none'>
-            <button id="play" className='bg-black hover:border-[#FF69B4] border-[#00FBFB] border-x-4 rounded-[1.5vw] p-[1vw]' onClick={playSounds}> play ▶️</button>
-            <button id="stop" className='bg-black hover:border-[#FF69B4] border-[#00FBFB] border-x-4 rounded-[1.5vw] p-[1vw]' onClick={stop}> stop ⏹️</button>
-            <button id="clear" className='bg-black hover:border-[#FF69B4] border-[#00FBFB] border-x-4 rounded-[1.5vw] p-[1vw]' onClick={clear}> clear 🔄</button>
+        <div className='flex flex-col md:flex-row md:items-center md:space-x-4 mt-[3%] text-center text-white select-none'>
+            {/* Group the first three buttons */}
+            <div className='flex space-x-4 justify-center'>
+                <button id="play" className='bg-black hover:border-[#FF69B4] border-[#00FBFB] border-x-4 rounded-[1.5vw] p-[1vw]' onClick={playSounds}> play ▶️</button>
+                <button id="stop" className='bg-black hover:border-[#FF69B4] border-[#00FBFB] border-x-4 rounded-[1.5vw] p-[1vw]' onClick={stop}> stop ⏹️</button>
+                <button id="clear" className='bg-black hover:border-[#FF69B4] border-[#00FBFB] border-x-4 rounded-[1.5vw] p-[1vw]' onClick={clear}> clear 🔄</button>
+            </div>
+
+            {/* Sample sound button only on a new line on mobile */}
+            <button id="sample" className='bg-black hover:border-fuchsia-700 border-fuchsia-400 border-x-4 rounded-[1.5vw] p-[1vw] mt-4 md:mt-0' onClick={loadSampleSound}>
+                use row 1 sample sound ⭐
+            </button>
         </div>
     )
 }

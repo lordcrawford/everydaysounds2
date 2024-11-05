@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 import SoundRow from "./sound_row.js"
 import Player from "./player.js"
@@ -21,6 +21,14 @@ const Home = () => {
         aboutRef.current.scrollIntoView({ behavior: 'smooth' });
     };
 
+    const soundRowRef = useRef(null);
+
+    const handleLoadSample = () => {
+        if (soundRowRef.current) {
+            soundRowRef.current.loadSampleSound(); // Trigger loadSampleSound for row 1
+        }
+    };
+
     useEffect(() => {
         startOrbsAnimation();
     }, []);
@@ -40,10 +48,11 @@ const Home = () => {
                     </nav>
                 </div>
                 <div className='mt-[8%] md:mt-0 flex flex-col items-center'>
-                    <Player/>
+                    {/* Pass down the sample loader function to Player */}
+                    <Player loadSampleSound={handleLoadSample}/>
                     <div id="sequencer" className='text-center mt-[10%] py-[1%] md:mt-[2%]
                     overflow-auto md:bg-[#E879F9]	 rounded-[20px] w-[76vw]' >
-                        <SoundRow soundrow_num={1} color={"#00FBFB"}/> 
+                        <SoundRow soundrow_num={1} color={"#00FBFB"} ref={soundRowRef} /> 
                         <SoundRow soundrow_num={2} color={"#03EEEE"} />
                         <SoundRow soundrow_num={3} color={"#03DCDC"}/>
                         <SoundRow soundrow_num={4} color={"#04C9C9"}/>
@@ -56,7 +65,7 @@ const Home = () => {
 
                 <div id="about_text" className=' pt-[5%]' ref={instructionsRef}>
 
-                    <div className='px-[8%] leading-normal font-light pt-[5%] md:pt-[10%]'>
+                    <div className='px-[8%] leading-normal font-light pt-[5%] md:pt-[10%] md:text-[1.4vw]'>
                         <span className='text-[#04C9C9] font-semibold text-[5vw] md:text-[4vw]'>Instructions</span><br/><br/>
 
                         What you see here is a <span className='font-semibold text-[#04C9C9]'> 16-step beat sequencer. </span>
@@ -70,7 +79,7 @@ const Home = () => {
                         it will continue to the next step as a continuous 16-step pattern.
                     </div>
 
-                    <div className='space-y-[1%] px-[10%] pt-[9%] text-center md:pb-[7%]'>
+                    <div className='space-y-[1%] px-[10%] pt-[9%] md:text-[1.4vw] text-center md:pb-[7%]'>
                         <span className='font-semibold text-[#FF69B4]'>1</span> - <span className='font-semibold text-[#04C9C9]'>Choose an audio file. </span>Only the first 100-300
                             milliseconds of the imported sound will be played. Please make sure your sound is short or starts 
                             with audio.<br/>
@@ -80,7 +89,7 @@ const Home = () => {
 
                     <hr style={{color: "#04C9C9", backgroundColor: "#04C9C9", height: "2px", border: "none", margin: "0 2% 0 2%"}}></hr>
                     
-                    <div className='px-[8%] leading-normal font-light pt-[5vw] md:pt-[10vw] pb-[20%] md:pb-[15%]' ref={aboutRef}>
+                    <div className='px-[8%] leading-normal font-light pt-[5vw] md:pt-[10vw] pb-[20%] md:pb-[15%] md:text-[1.4vw]' ref={aboutRef}>
 
                         <span className='text-[#04C9C9] font-semibold text-[5vw] md:text-[4vw]'>About</span><br/><br/>
 
