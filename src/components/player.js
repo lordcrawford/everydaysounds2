@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 
 const Player = ({ loadSampleSound }) => {
 
@@ -8,10 +8,17 @@ const Player = ({ loadSampleSound }) => {
     var col_to_play = 1;
     var tempo = 200;
     const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    const playButtonRef = useRef(null); // Ref for play button
 
     function playSounds(e){
         audioCtx.resume();
         playing = !playing;
+
+        // Change button text based on playing status
+        if (playButtonRef.current) {
+            playButtonRef.current.innerHTML = playing ? 'pause ⏸️' : 'play ▶️';
+        }
+
         if (playing){
             playColumns()
         }
@@ -75,7 +82,7 @@ const Player = ({ loadSampleSound }) => {
 
     function stop(e){
         playing = false;
-
+        playButtonRef.current.innerHTML = 'play ▶️';
         // clears highlights on columns playing/played
         for(let col = 1; col < 17; col++){
             const steps_to_clear = document.getElementsByClassName('step'+(col))
@@ -96,7 +103,7 @@ const Player = ({ loadSampleSound }) => {
         <div className='flex flex-col md:flex-row md:items-center md:space-x-4 mt-[3%] text-center text-white select-none'>
             {/* Group the first three buttons */}
             <div className='flex space-x-4 justify-center'>
-                <button id="play" className='bg-black hover:border-[#FF69B4] border-[#00FBFB] border-x-4 rounded-[1.5vw] p-[1vw]' onClick={playSounds}> play ▶️</button>
+                <button id="play" ref={playButtonRef} className='bg-black hover:border-[#FF69B4] border-[#00FBFB] border-x-4 w-[25vw] lg:w-[9vw] md:w-[12vw] md:rounded-[1.5vw] p-[1vw]' onClick={playSounds}> play ▶️</button>
                 <button id="stop" className='bg-black hover:border-[#FF69B4] border-[#00FBFB] border-x-4 rounded-[1.5vw] p-[1vw]' onClick={stop}> stop ⏹️</button>
                 <button id="clear" className='bg-black hover:border-[#FF69B4] border-[#00FBFB] border-x-4 rounded-[1.5vw] p-[1vw]' onClick={clear}> clear 🔄</button>
             </div>
