@@ -37,7 +37,7 @@
     margin: auto; 
     background-color: #FF69B4; 
     border-radius: 50%; 
-  }
+}
 
 
 @keyframes rotateAnimation {
@@ -47,18 +47,18 @@
     to {
       transform: rotate(360deg); 
     }
-  }
+}
 
 @keyframes pulse {
-0% {
-    transform: scale(1);
-}
-50% {
-    transform: scale(1.2);
-}
-100% {
-    transform: scale(1);
-}
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.2);
+    }
+    100% {
+        transform: scale(1);
+    }
 }
 
 @media screen and (max-width: 600px) {
