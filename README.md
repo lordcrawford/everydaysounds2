@@ -6,4 +6,4 @@ This is a 16-step beat sequencer: a tool that allows users to program rhythms by
 
 Each step will play a combination of sounds depending on which sounds are uploaded in the rows (tracks). Once one step has played for 200 milliseconds (starter tempo), it will continue to the next step, creating a continuous 16-step loop.
 
-* Built using React and Tailwind CSS *
+*Built using React and Tailwind CSS
